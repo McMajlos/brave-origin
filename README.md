@@ -17,7 +17,7 @@
 
 ## ✨ What It Does
 
-Brave includes optional services such as **Rewards, Wallet, VPN, News, Talk, Tor, Playlist and Wayback Machine**. This project uses managed policies to disable selected features and telemetry. The effect depends on whether your Brave version supports each policy; reduced RAM use or faster browsing is not guaranteed.
+Brave includes optional services such as **Rewards, Wallet, VPN, News, Talk, Tor, Playlist and Wayback Machine**. This project uses managed policies to **disable selected features and telemetry**. The effect depends on whether your Brave version supports each policy; reduced RAM use or faster browsing is not guaranteed.
 
 It also covers features you may actually use (**Leo AI, Speedreader, sync, DevTools, autofill...**). That is why there are two levels, and you choose what stays:
 
