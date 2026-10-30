@@ -46,7 +46,16 @@ Brave is great, but it ships with **Rewards, Wallet, VPN, Leo AI, News, Talk, To
 chmod +x setup.sh && ./setup.sh
 ```
 
-The script offers to back up your current Brave policy/desktop entry first (recommended). To undo everything later:
+The script shows a menu with the differences between levels:
+
+| Level | What it does |
+|---|---|
+| **1) Extreme** | Original behaviour: everything off (Leo, Speedreader, sync, passwords, autofill, DevTools, translate, bookmarks bar...) |
+| **2) Hard** | Same debloat, keeps Leo AI, Speedreader, sync, address autofill, DevTools, translate/spellcheck, bookmarks bar; Safe Browsing Standard; DoH `automatic` |
+| **3) Custom** | Choose Extreme / Hard / Skip per category |
+| **4) Restore** | Undo changes from the backup |
+
+It also offers to back up your current Brave policy/desktop entry first (recommended). To undo everything later:
 
 ```bash
 ./setup.sh --restore
