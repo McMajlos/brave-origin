@@ -193,7 +193,10 @@ brave://flags/#enable-zero-copy          → Enabled
 brave://flags/#enable-parallel-downloading → Enabled
 brave://settings/appearance              → "Use system title bar and borders" ON
 brave://settings/system                  → "Memory Saver" ON
+brave://settings/security                → "Use secure DNS" → choose a provider (Hard only)
 ```
+
+> **DoH (DNS-over-HTTPS)** encrypts the website lookups your browser makes, so your ISP and the local network can't see which sites you visit. It does not hide your IP and does not block ads.
 
 ---
 
