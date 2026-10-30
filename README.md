@@ -19,6 +19,8 @@
 
 Brave is great, but it ships with **Rewards, Wallet, VPN, Leo AI, News, Talk, Tor, Speedreader, Playlist, Wayback Machine, Web Discovery, telemetry** — a ton of features most people never touch. This project kills them all at the **system policy level**, meaning they don't just get hidden — they stop loading entirely. No background processes, no UI clutter, no wasted RAM.
 
+> The table below describes the **Extreme** level. The **Hard** level (recommended) keeps Leo AI, Speedreader, sync and a few other things - see [Debloat levels](#debloat-levels).
+
 | Feature | Effect |
 |---------|--------|
 | Leo AI | Disabled at root level |
@@ -40,17 +42,32 @@ Brave is great, but it ships with **Rewards, Wallet, VPN, Leo AI, News, Talk, To
 
 ## 🚀 One-Click Setup
 
+All three scripts (Linux, Windows, macOS) work the same way: they show a menu, offer a backup, and write the policies for the level you choose.
+
 ### 🐧 Linux
 
 ```bash
 chmod +x setup.sh && ./setup.sh
 ```
 
-The script shows a menu:
+### 🪟 Windows
+
+- **Normal install:** Right-click `setup.bat` → **Run as Administrator**
+- **Store install:** Run `setup.bat` as Admin — it will detect Store path and handle it
+
+### 🍎 macOS
+
+```bash
+chmod +x setup_mac.sh && ./setup_mac.sh
+```
+
+### Debloat levels
+
+The scripts show this menu:
 
 1. **Hard** - same debloat, but keeps features you may actually use (recommended)
 2. **Extreme** - maximum lockdown, everything disabled
-3. **Custom** - choose Extreme / Hard / Skip per category
+3. **Custom** - choose Hard / Extreme / Skip per category
 4. **Restore** - back to the original Brave state (from backup)
 
 **Same in both:** Safe Browsing = Standard (Enhanced shares more visited links).
@@ -81,22 +98,21 @@ The script shows a menu:
 | DevTools | off | **ON** |
 | DNS-over-HTTPS | forced (AdGuard) | **your choice** (not locked) |
 
-It also offers to back up your current Brave policy/desktop entry first (recommended). To undo everything later:
+Policies lock the matching options in `brave://settings` ("managed by your organization"). Use **Restore** to undo.
 
-```bash
-./setup.sh --restore
-```
+### Backup & restore
 
-### 🪟 Windows
+Before changing anything the script offers to back up your current Brave policies (strongly recommended). An existing backup is never overwritten, so running the script again keeps your original state.
 
-- **Normal install:** Right-click `setup.bat` → **Run as Administrator**
-- **Store install:** Run `setup.bat` as Admin — it will detect Store path and handle it
+| Platform | Backup location | Restore |
+|---|---|---|
+| Linux | `~/.brave-origin-backup` (policy file + desktop entry) | `./setup.sh --restore` |
+| Windows | `%USERPROFILE%\.brave-origin-backup` (registry export of the Brave policy key) | `setup.bat /restore` |
+| macOS | `~/.brave-origin-backup` (managed plist + launcher app) | `./setup_mac.sh --restore` |
 
-### 🍎 macOS
+You can also run the script again and choose **4) Restore**. Without a backup, restore only removes the policy values created by the script (other policies are left alone).
 
-```bash
-chmod +x setup_mac.sh && sudo ./setup_mac.sh
-```
+Manual flags and settings in `brave://flags` / `brave://settings` are not touched by the scripts - revert them by hand if you changed them.
 
 ### 🤖 Android
 
@@ -107,6 +123,8 @@ See [Android note](#android).
 ---
 
 ## 📋 Policy Reference
+
+> The reference below lists the **Extreme** values. **Hard** differs only where the table above says so (`policies-hard.json` / `brave-origin-hard.reg` contain the exact Hard set).
 
 ### Brave Bloat
 | Policy | Effect |
@@ -175,7 +193,7 @@ Pages loading slow? `NetworkPredictionOptions` is set to **0** (full prediction)
 If still slow, your secure DNS provider might be the bottleneck:
 
 - **Hard:** DNS is not locked. Change it in Brave settings (search for "secure DNS"; usually `brave://settings/security`).
-- **Extreme:** the provider is forced by policy (AdGuard) and cannot be changed in settings. Edit `DnsOverHttpsTemplates` in `setup.sh` and run it again.
+- **Extreme:** the provider is forced by policy (AdGuard) and cannot be changed in settings. Edit `DnsOverHttpsTemplates` in `setup.sh` / `setup.bat` / `setup_mac.sh` and run it again.
 
 | Provider | Template |
 |----------|----------|
@@ -234,6 +252,15 @@ Create a desktop shortcut and point its icon to your `.ico` file:
 
 | File | Platform | Purpose |
 |------|----------|---------|
+| `policies.json` | All | Complete policy definitions (Extreme) |
+| `policies-hard.json` | All | Complete policy definitions (Hard) |
+| `setup.sh` | Linux | Menu, backup/restore, policy deploy + desktop entry patch |
+| `setup.bat` | Windows | Menu, backup/restore, registry policies + shortcut flags (normal & Store) |
+| `setup_mac.sh` | macOS | Menu, backup/restore, plist deployment + launcher app with flags |
+| `brave-origin.reg` | Windows | Manual registry import (Extreme) |
+| `brave-origin-hard.reg` | Windows | Manual registry import (Hard) |
+
+------|----------|---------|
 | `policies.json` | All | Complete policy definitions |
 | `setup.sh` | Linux | Auto-deploy + desktop entry patch |
 | `setup.bat` | Windows | Reg import + shortcut flags (normal & Store) |
