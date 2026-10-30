@@ -46,6 +46,12 @@ Brave is great, but it ships with **Rewards, Wallet, VPN, Leo AI, News, Talk, To
 chmod +x setup.sh && ./setup.sh
 ```
 
+The script offers to back up your current Brave policy/desktop entry first (recommended). To undo everything later:
+
+```bash
+./setup.sh --restore
+```
+
 ### 🪟 Windows
 
 - **Normal install:** Right-click `setup.bat` → **Run as Administrator**
