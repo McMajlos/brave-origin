@@ -102,7 +102,7 @@ CAT_HARD[telemetry]="same as Extreme"
 
 CAT_TITLE[privacy]="DNS & Safe Browsing"
 CAT_EXT[privacy]="DNS-over-HTTPS forced via AdGuard (no fallback), Safe Browsing Standard"
-CAT_HARD[privacy]="DNS-over-HTTPS 'automatic' (system resolver, with fallback), Safe Browsing Standard"
+CAT_HARD[privacy]="DNS-over-HTTPS not forced (you choose in browser settings), Safe Browsing Standard"
 
 CAT_TITLE[sync]="Sync & profiles"
 CAT_EXT[sync]="Sync OFF for all profiles, adding profiles and guest mode blocked"
@@ -173,8 +173,6 @@ emit() {
       if [ "$level" = "e" ]; then
         echo '"DnsOverHttpsMode": "secure"'
         echo '"DnsOverHttpsTemplates": "https://dns.adguard-dns.com/dns-query"'
-      else
-        echo '"DnsOverHttpsMode": "automatic"'
       fi
       echo '"SafeBrowsingProtectionLevel": 1'
       ;;
@@ -276,7 +274,7 @@ print_levels() {
   row "Bookmarks bar"               "hidden"             "shown"
   row "New tab page"                "about:blank"        "unchanged"
   row "DevTools"                    "off"                "ON"
-  row "DNS-over-HTTPS"              "forced (AdGuard)"   "automatic"
+  row "DNS-over-HTTPS"              "forced (AdGuard)"   "your choice"
   sep
   echo ""
   echo "  Both levels: homepage = about:blank, search = Brave Search"

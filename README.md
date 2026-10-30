@@ -79,7 +79,7 @@ The script shows a menu:
 | Bookmarks bar | hidden | **shown** |
 | New tab page | about:blank | **unchanged** |
 | DevTools | off | **ON** |
-| DNS-over-HTTPS | forced (AdGuard) | **automatic** |
+| DNS-over-HTTPS | forced (AdGuard) | **your choice** (not locked) |
 
 It also offers to back up your current Brave policy/desktop entry first (recommended). To undo everything later:
 
@@ -172,11 +172,14 @@ Pages loading slow? `NetworkPredictionOptions` is set to **0** (full prediction)
 - ✅ TCP/SSL preconnection
 - ✅ Prerendering
 
-If still slow, your secure DNS provider might be the bottleneck. Change in `brave://settings/privacy`:
+If still slow, your secure DNS provider might be the bottleneck:
+
+- **Hard:** DNS is not locked. Change it in Brave settings (search for "secure DNS"; usually `brave://settings/security`).
+- **Extreme:** the provider is forced by policy (AdGuard) and cannot be changed in settings. Edit `DnsOverHttpsTemplates` in `setup.sh` and run it again.
 
 | Provider | Template |
 |----------|----------|
-| **AdGuard** (default) | `https://dns.adguard-dns.com/dns-query` |
+| **AdGuard** (default in Extreme) | `https://dns.adguard-dns.com/dns-query` |
 | **Cloudflare** (fast) | `https://cloudflare-dns.com/dns-query` |
 | **Quad9** (secure) | `https://dns.quad9.net/dns-query` |
 
