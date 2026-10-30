@@ -4,7 +4,8 @@ set -e
 ###############################################################################
 # BRAVE ORIGIN - Complete debloat & speed fix + icon swap
 # Platform: Linux
-# Usage:   chmod +x setup.sh && sudo ./setup.sh
+# Usage:   chmod +x setup.sh && ./setup.sh
+#          (also works with: sudo ./setup.sh)
 # Icon:    Place BO.png in same folder (optional)
 # Verif:   brave://policy
 ###############################################################################
@@ -12,6 +13,14 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 POLICY_DIR="/etc/brave/policies/managed"
 POLICY_FILE="$POLICY_DIR/brave-origin.json"
+
+# Resolve the real user's home, so it also works when started with sudo
+# (under sudo $HOME can be /root).
+REAL_USER="${SUDO_USER:-$(id -un)}"
+REAL_HOME="$(getent passwd "$REAL_USER" | cut -d: -f6)"
+REAL_HOME="${REAL_HOME:-$HOME}"
+LOCAL_APPS="$REAL_HOME/.local/share/applications"
+LOCAL_DESKTOP="$LOCAL_APPS/brave-browser.desktop"
 
 echo "=========================================="
 echo "  Brave Origin - Linux Setup"
@@ -103,8 +112,7 @@ echo "    -> $POLICY_FILE"
 # --- 2. Patch the Brave desktop entry with debloat + speed flags ---
 echo "[2] Patching desktop entry..."
 
-LOCAL_DESKTOP="$HOME/.local/share/applications/brave-browser.desktop"
-mkdir -p "$HOME/.local/share/applications"
+mkdir -p "$LOCAL_APPS"
 
 SYS_DESKTOP=$(ls /usr/share/applications/brave*.desktop 2>/dev/null | head -1)
 if [ -n "$SYS_DESKTOP" ]; then
@@ -114,7 +122,7 @@ fi
 if [ -f "$LOCAL_DESKTOP" ]; then
   sed -i 's|^Exec=brave-browser\( .*\)\?$|Exec=brave-browser --disable-features=AIChat,BraveVPN --enable-features=HighEfficiencyMode\1|' "$LOCAL_DESKTOP"
   sed -i 's|^Exec=brave-browser-stable\( .*\)\?$|Exec=brave-browser-stable --disable-features=AIChat,BraveVPN --enable-features=HighEfficiencyMode\1|' "$LOCAL_DESKTOP"
-  update-desktop-database "$HOME/.local/share/applications" 2>/dev/null || true
+  update-desktop-database "$LOCAL_APPS" 2>/dev/null || true
   echo "    -> $LOCAL_DESKTOP"
 else
   cat > "$LOCAL_DESKTOP" << EOF
@@ -132,6 +140,7 @@ StartupNotify=true
 EOF
   echo "    -> created $LOCAL_DESKTOP"
 fi
+chown "$(id -u "$REAL_USER"):$(id -g "$REAL_USER")" "$LOCAL_DESKTOP" 2>/dev/null || true
 
 # --- 4. Flush DNS (speed helper) ---
 command -v resolvectl &>/dev/null && sudo resolvectl flush-caches 2>/dev/null || true

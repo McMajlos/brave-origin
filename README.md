@@ -43,7 +43,7 @@ Brave is great, but it ships with **Rewards, Wallet, VPN, Leo AI, News, Talk, To
 ### 🐧 Linux
 
 ```bash
-chmod +x setup.sh && sudo ./setup.sh
+chmod +x setup.sh && ./setup.sh
 ```
 
 ### 🪟 Windows
