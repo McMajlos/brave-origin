@@ -25,24 +25,37 @@ It also covers features you may actually use (**Leo AI, Speedreader, sync, DevTo
 - **Extreme** - maximum lockdown, everything disabled.
 - **Custom** - pick Hard / Extreme / Skip per category.
 
-See [Debloat levels](#debloat-levels) for the full comparison.
+What each level does (the same table is shown by the scripts):
 
-| Feature | Extreme | Hard |
-|---------|---------|------|
-| Brave Rewards / BAT | Disabled at root level | Disabled at root level |
-| Crypto Wallet + Web3 | Disabled at root level | Disabled at root level |
-| VPN upsells | Disabled at root level | Disabled at root level |
-| Brave News feed | Disabled at root level | Disabled at root level |
-| Brave Talk | Disabled at root level | Disabled at root level |
-| Tor mode | Disabled at root level | Disabled at root level |
-| Wayback Machine | Disabled at root level | Disabled at root level |
-| Playlist | Disabled at root level | Disabled at root level |
-| P3A / Stats / Web Discovery | Disabled at root level | Disabled at root level |
-| Leo AI | Disabled at root level | **Kept** |
-| Speedreader | Disabled at root level | **Kept** |
-| Sync | Disabled at root level | **Kept** (per profile) |
+**Same in both:** Safe Browsing = Standard (Enhanced shares more visited links).
 
-Both levels **keep Shields** (ad/tracker blocking) fully intact.
+**Disabled in both levels**
+
+| Setting | Extreme | Hard |
+|---|---|---|
+| Rewards / Wallet / VPN / News / Tor | off | off |
+| Telemetry & tracking | off | off |
+| Password manager | off | off |
+| Search suggestions | off | off |
+| Background mode | off | off |
+
+**Differences**
+
+| Setting | Extreme | Hard |
+|---|---|---|
+| Leo AI | off | **ON** |
+| Speedreader | off | **ON** |
+| Sync | off (all profiles) | **ON** |
+| Add profile / guest mode | blocked | **allowed** |
+| Address autofill | off | **ON** |
+| Card autofill | off | Brave default |
+| Translate & spellcheck | off | **ON** |
+| Bookmarks bar | hidden | **shown** |
+| New tab page | about:blank | **unchanged** |
+| DevTools | off | **ON** |
+| DNS-over-HTTPS | forced (AdGuard) | **your choice** (not locked) |
+
+**Both levels also:** homepage = `about:blank`, default search = Brave Search, Memory Saver ON, HTTPS upgrades ON. Shields (ad/tracker blocking) stay fully intact.
 
 ---
 
@@ -76,33 +89,7 @@ The scripts show this menu:
 3. **Custom** - choose Hard / Extreme / Skip per category
 4. **Restore** - back to the original Brave state (from backup)
 
-**Same in both:** Safe Browsing = Standard (Enhanced shares more visited links).
-
-**Disabled in both levels**
-
-| Setting | Extreme | Hard |
-|---|---|---|
-| Rewards / Wallet / VPN / News / Tor | off | off |
-| Telemetry & tracking | off | off |
-| Password manager | off | off |
-| Search suggestions | off | off |
-| Background mode | off | off |
-
-**Differences**
-
-| Setting | Extreme | Hard |
-|---|---|---|
-| Leo AI | off | **ON** |
-| Speedreader | off | **ON** |
-| Sync | off (all profiles) | **ON** |
-| Add profile / guest mode | blocked | **allowed** |
-| Address autofill | off | **ON** |
-| Card autofill | off | Brave default |
-| Translate & spellcheck | off | **ON** |
-| Bookmarks bar | hidden | **shown** |
-| New tab page | about:blank | **unchanged** |
-| DevTools | off | **ON** |
-| DNS-over-HTTPS | forced (AdGuard) | **your choice** (not locked) |
+The comparison of what each level does is in the "What It Does" section at the top.
 
 Policies lock the matching options in `brave://settings` ("managed by your organization"). Use **Restore** to undo.
 
