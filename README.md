@@ -53,6 +53,8 @@ The script shows a menu:
 3. **Custom** - choose Extreme / Hard / Skip per category
 4. **Restore** - back to the original Brave state (from backup)
 
+**Same in both:** Safe Browsing = Standard (Enhanced shares more visited links).
+
 **Disabled in both levels**
 
 | Setting | Extreme | Hard |
@@ -62,8 +64,6 @@ The script shows a menu:
 | Password manager | off | off |
 | Search suggestions | off | off |
 | Background mode | off | off |
-
-**Same in both:** Safe Browsing = Standard (Enhanced / level 2 shares more visited links).
 
 **Differences**
 
