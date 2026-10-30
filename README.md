@@ -169,17 +169,17 @@ Two tables cover the presets: shared settings appear once, and only the differen
 
 | Setting / policy | Extreme | Hard |
 |---|---|---|
-| Leo AI · `BraveAIChatEnabled` | Off (`false`) | **User settings** |
+| Leo AI · `BraveAIChatEnabled` | Off (`false`) | On (`true`) |
 | Speedreader · `BraveSpeedreaderEnabled` | Off (`false`) | On (`true`) |
-| Sync · `SyncDisabled` | Off for all profiles (`true`) | **User settings** — choose per profile |
-| Adding profiles · `BrowserAddPersonEnabled` | Blocked (`false`) | **User settings** |
-| Guest mode · `BrowserGuestModeEnabled` | Blocked (`false`) | **User settings** |
+| Sync · `SyncDisabled` | Off for all profiles (`true`) | On (`true`) |
+| Adding profiles · `BrowserAddPersonEnabled` | Blocked (`false`) | On (`true`) |
+| Guest mode · `BrowserGuestModeEnabled` | Blocked (`false`) | On (`true`) |
 | Address autofill · `AutofillAddressEnabled` | Off (`false`) | On (`true`) |
-| Card autofill · `AutofillCreditCardEnabled` | Off (`false`) | **User settings** |
+| Card autofill · `AutofillCreditCardEnabled` | Off (`false`) | On (`true`) |
 | Translation · `TranslateEnabled` | Off (`false`) | On (`true`) |
 | Local spellcheck · `SpellcheckEnabled` | Off (`false`) | On (`true`) |
 | Bookmarks bar · `BookmarkBarEnabled` | Hidden (`false`) | Shown (`true`) |
-| New tab page · `NewTabPageLocation` | Blank page (`about:blank`) | **User settings** — extensions can replace it |
+| New tab page · `NewTabPageLocation` | Blank page (`about:blank`) | Default |
 | DevTools · `DeveloperToolsAvailability` | Blocked (`2`) | Allowed (`1`) |
 | Secure DNS mode · `DnsOverHttpsMode` | DoH only (`secure`), no unencrypted fallback | **User settings** |
 | Secure DNS provider · `DnsOverHttpsTemplates` | AdGuard DoH¹ | **User settings** |
@@ -220,12 +220,13 @@ If still slow, your secure DNS provider might be the bottleneck:
 ## 🧩 Post-Setup (Do These Once)
 
 ```
-brave://flags/#brave-sidebar            → Disabled
-brave://flags/#enable-zero-copy          → Enabled
+brave://flags/#brave-news-sidebar          → Disabled
 brave://flags/#enable-parallel-downloading → Enabled
-brave://settings/appearance              → "Use system title bar and borders" ON
-brave://settings/system                  → "Memory Saver" ON
-brave://settings/security                → "Use secure DNS" → choose a provider (Hard only)
+brave://settings/appearance                → "Use system title bar and borders" ON
+brave://settings/system                    → "Memory Saver" ON
+Optional:
+brave://settings/security                  → "Use secure DNS" → choose a provider (Hard only)
+brave://flags/#enable-zero-copy            → Enabled - faster browsing. Problems may occur on older GPUs. If you get problems or artifacts leave default.
 ```
 
 > **DoH (DNS-over-HTTPS)** encrypts the website lookups your browser makes, so your ISP and the local network can't see which sites you visit. It does not hide your IP and does not block ads.
