@@ -118,7 +118,7 @@ CAT_HARD[languages]="Translate and local spellcheck ON (Google spellcheck servic
 
 CAT_TITLE[ui]="Interface"
 CAT_EXT[ui]="Bookmarks bar hidden, no home button, homepage/new tab = about:blank, no default-browser nag"
-CAT_HARD[ui]="Bookmarks bar shown, no home button, homepage/new tab = about:blank, no default-browser nag"
+CAT_HARD[ui]="Bookmarks bar shown, no home button, homepage = about:blank, new tab unchanged (extensions can replace it), no default-browser nag"
 
 CAT_TITLE[devtools]="Developer tools"
 CAT_EXT[devtools]="DevTools disabled"
@@ -210,7 +210,7 @@ emit() {
       [ "$level" = "h" ] && echo '"BookmarkBarEnabled": true'
       echo '"ShowHomeButton": false'
       echo '"HomepageLocation": "about:blank"'
-      echo '"NewTabPageLocation": "about:blank"'
+      [ "$level" = "e" ] && echo '"NewTabPageLocation": "about:blank"'
       echo '"DefaultBrowserSettingEnabled": false'
       ;;
     devtools)
@@ -266,10 +266,11 @@ print_levels() {
   printf "  %-30s %-22s %s\n" "Card autofill"                 "off"             "Brave default"
   printf "  %-30s %-22s %s\n" "Translate & spellcheck"        "off"             "ON"
   printf "  %-30s %-22s %s\n" "Bookmarks bar"                 "hidden"          "shown"
+  printf "  %-30s %-22s %s\n" "New tab page"                  "about:blank"     "unchanged"
   printf "  %-30s %-22s %s\n" "DevTools"                      "off"             "ON"
   printf "  %-30s %-22s %s\n" "DNS-over-HTTPS"                "forced (AdGuard)" "automatic"
   echo ""
-  echo "  Both levels: homepage/new tab = about:blank, search = Brave Search"
+  echo "  Both levels: homepage = about:blank, search = Brave Search"
   echo "  (Brave, Google, DuckDuckGo), Memory Saver ON, HTTPS upgrades ON."
   echo "  Policies lock the matching options in brave://settings"
   echo "  (\"managed by your organization\"). Option 4 undoes this."

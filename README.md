@@ -77,6 +77,7 @@ The script shows a menu:
 | Card autofill | off | Brave default |
 | Translate & spellcheck | off | **ON** |
 | Bookmarks bar | hidden | **shown** |
+| New tab page | about:blank | **unchanged** |
 | DevTools | off | **ON** |
 | DNS-over-HTTPS | forced (AdGuard) | **automatic** |
 
