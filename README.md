@@ -207,7 +207,7 @@ See [Android note](#android).
 | `DefaultSearchProviderEnabled` | `true` | — |
 | `DefaultSearchProviderName` | `Brave Search` | — |
 | `DefaultSearchProviderSearchURL` | `https://search.brave.com/search?q={searchTerms}` | — |
-| `ManagedSearchEngines` (Linux / JSON only) | Brave Search, Google, DuckDuckGo | — |
+| `ManagedSearchEngines` | Brave Search, Google, DuckDuckGo | — |
 
 ### Performance & misc
 
@@ -222,7 +222,7 @@ See [Android note](#android).
 | `PromptForDownloadLocation` | `true` | `true` |
 | `PrintingEnabled` | `true` | `true` |
 
-`NetworkPredictionOptions = 0` keeps DNS prefetch and preconnect enabled (speed fix) in both levels. `ManagedSearchEngines` is not included in the Windows/macOS scripts or the `.reg` files.
+`NetworkPredictionOptions = 0` keeps DNS prefetch and preconnect enabled (speed fix) in both levels.
 
 ---
 

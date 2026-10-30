@@ -4,8 +4,6 @@ Windows Registry Editor Version 5.00
 ; Import this file, then fully restart Brave
 ; Verify at brave://policy
 ;
-; NOTE: ManagedSearchEngines is NOT included here (complex policies need special
-; registry formatting). See policies.json / policies-hard.json for the full config.
 ; To undo: run setup.bat and choose 4) Restore, or delete the values under the key.
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\BraveSoftware\Brave]

@@ -135,6 +135,7 @@ emit() {
       ;;
     search)
       if [ "$level" = "e" ]; then
+        echo 'ManagedSearchEngines|searchengines|-'
         echo 'DefaultSearchProviderEnabled|bool|true'
         echo 'DefaultSearchProviderName|string|Brave Search'
         echo 'DefaultSearchProviderSearchURL|string|https://search.brave.com/search?q={searchTerms}'
@@ -166,7 +167,7 @@ cat_info() {
     languages) C_TITLE="Translate and spellcheck"; C_EXT="Translate and spellcheck OFF"; C_HARD="Translate and local spellcheck ON, Google spellcheck service stays OFF" ;;
     ui) C_TITLE="Interface"; C_EXT="Bookmarks bar hidden, no home button, homepage and new tab about:blank, no default-browser nag"; C_HARD="Bookmarks bar shown, no home button, homepage about:blank, new tab unchanged so extensions can replace it, no default-browser nag" ;;
     devtools) C_TITLE="Developer tools"; C_EXT="DevTools disabled"; C_HARD="DevTools enabled" ;;
-    search) C_TITLE="Search engine"; C_EXT="Default search engine Brave Search"; C_HARD="Search engine left to you, not overridden" ;;
+    search) C_TITLE="Search engine"; C_EXT="Default search engine Brave Search, list restricted to Brave Search, Google, DuckDuckGo"; C_HARD="Search engine left to you, not overridden" ;;
     perf) C_TITLE="Performance and misc"; C_EXT="Background mode OFF so Brave quits when the last window closes, Memory Saver ON, HTTPS upgrades ON, incognito, printing and downloads allowed"; C_HARD="same as Extreme" ;;
   esac
 }
@@ -241,9 +242,17 @@ fi
 MANAGED_PREFS_DIR="/Library/Managed Preferences"
 PLIST="$MANAGED_PREFS_DIR/$BRAVE_BUNDLE.plist"
 
+write_search_engines() {
+  sudo defaults write "$PLIST" ManagedSearchEngines -array \
+    '<dict><key>name</key><string>Brave Search</string><key>keyword</key><string>search.brave.com</string><key>search_url</key><string>https://search.brave.com/search?q={searchTerms}</string><key>suggest_url</key><string>https://search.brave.com/api/suggest?q={searchTerms}</string><key>encoding</key><string>UTF-8</string><key>favicon_url</key><string>https://brave.com/favicon.ico</string></dict>' \
+    '<dict><key>name</key><string>Google</string><key>keyword</key><string>google.com</string><key>search_url</key><string>https://www.google.com/search?q={searchTerms}</string><key>suggest_url</key><string>https://www.google.com/complete/search?output=chrome&amp;q={searchTerms}</string><key>encoding</key><string>UTF-8</string><key>favicon_url</key><string>https://www.google.com/favicon.ico</string></dict>' \
+    '<dict><key>name</key><string>DuckDuckGo</string><key>keyword</key><string>duckduckgo.com</string><key>search_url</key><string>https://duckduckgo.com/?q={searchTerms}</string><key>suggest_url</key><string>https://duckduckgo.com/ac/?q={searchTerms}&amp;type=list</string><key>encoding</key><string>UTF-8</string><key>favicon_url</key><string>https://duckduckgo.com/favicon.ico</string></dict>'
+}
+
 write_policy() {
   local key="$1" type="$2" val="$3"
   case "$type" in
+    searchengines) write_search_engines ;;
     bool)    sudo defaults write "$PLIST" "$key" -bool "$val" ;;
     integer) sudo defaults write "$PLIST" "$key" -int "$val" ;;
     string)  sudo defaults write "$PLIST" "$key" -string "$val" ;;
