@@ -53,24 +53,32 @@ The script shows a menu:
 3. **Custom** - choose Extreme / Hard / Skip per category
 4. **Restore** - back to the original Brave state (from backup)
 
+**Disabled in both levels**
+
 | Setting | Extreme | Hard |
 |---|---|---|
 | Rewards / Wallet / VPN / News / Tor | off | off |
 | Telemetry & tracking | off | off |
+| Password manager | off | off |
+| Search suggestions | off | off |
+| Background mode | off | off |
+
+**Same in both:** Safe Browsing = Standard (Enhanced / level 2 shares more visited links).
+
+**Differences**
+
+| Setting | Extreme | Hard |
+|---|---|---|
 | Leo AI | off | **ON** |
 | Speedreader | off | **ON** |
-| Safe Browsing | Enhanced | **Standard** |
-| DNS-over-HTTPS | forced (AdGuard) | **automatic** |
 | Sync | off (all profiles) | **ON** |
 | Add profile / guest mode | blocked | **allowed** |
-| Password manager | off | off |
 | Address autofill | off | **ON** |
 | Card autofill | off | Brave default |
 | Translate & spellcheck | off | **ON** |
 | Bookmarks bar | hidden | **shown** |
 | DevTools | off | **ON** |
-| Search suggestions | off | off |
-| Background mode | off | off |
+| DNS-over-HTTPS | forced (AdGuard) | **automatic** |
 
 It also offers to back up your current Brave policy/desktop entry first (recommended). To undo everything later:
 

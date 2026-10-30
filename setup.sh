@@ -101,7 +101,7 @@ CAT_EXT[telemetry]="P3A, stats ping, metrics, web discovery, feedback, Privacy S
 CAT_HARD[telemetry]="same as Extreme"
 
 CAT_TITLE[privacy]="DNS & Safe Browsing"
-CAT_EXT[privacy]="DNS-over-HTTPS forced via AdGuard (no fallback), Safe Browsing Enhanced (sends URLs to Google)"
+CAT_EXT[privacy]="DNS-over-HTTPS forced via AdGuard (no fallback), Safe Browsing Standard"
 CAT_HARD[privacy]="DNS-over-HTTPS 'automatic' (system resolver, with fallback), Safe Browsing Standard"
 
 CAT_TITLE[sync]="Sync & profiles"
@@ -173,11 +173,10 @@ emit() {
       if [ "$level" = "e" ]; then
         echo '"DnsOverHttpsMode": "secure"'
         echo '"DnsOverHttpsTemplates": "https://dns.adguard-dns.com/dns-query"'
-        echo '"SafeBrowsingProtectionLevel": 2'
       else
         echo '"DnsOverHttpsMode": "automatic"'
-        echo '"SafeBrowsingProtectionLevel": 1'
       fi
+      echo '"SafeBrowsingProtectionLevel": 1'
       ;;
     sync)
       if [ "$level" = "e" ]; then
@@ -241,29 +240,34 @@ emit() {
 print_levels() {
   echo "Debloat levels:"
   echo ""
-  echo "  1) EXTREME  - maximum lockdown, everything below is disabled."
+  echo "  1) EXTREME  - maximum lockdown, everything disabled."
   echo "  2) HARD     - same debloat, but keeps features you may actually use."
   echo "  3) CUSTOM   - choose Extreme / Hard / Skip for each category."
   echo "  4) RESTORE  - back to the original Brave state (from backup)."
   echo ""
   printf "  %-30s %-22s %s\n" "Setting" "EXTREME" "HARD"
   echo "  ------------------------------------------------------------------"
+  echo "  Disabled in both:"
   printf "  %-30s %-22s %s\n" "Rewards/Wallet/VPN/News/Tor"   "off"             "off"
   printf "  %-30s %-22s %s\n" "Telemetry & tracking"          "off"             "off"
+  printf "  %-30s %-22s %s\n" "Password manager"              "off"             "off"
+  printf "  %-30s %-22s %s\n" "Search suggestions"            "off"             "off"
+  printf "  %-30s %-22s %s\n" "Background mode"               "off"             "off"
+  echo ""
+  echo "  Same in both:"
+  printf "  %-30s %s\n" "Safe Browsing" "Standard (Enhanced/level 2 shares more visited links)"
+  echo ""
+  echo "  Differences:"
   printf "  %-30s %-22s %s\n" "Leo AI"                        "off"             "ON"
   printf "  %-30s %-22s %s\n" "Speedreader"                   "off"             "ON"
-  printf "  %-30s %-22s %s\n" "Safe Browsing"                 "Enhanced"        "Standard"
-  printf "  %-30s %-22s %s\n" "DNS-over-HTTPS"                "forced (AdGuard)" "automatic"
   printf "  %-30s %-22s %s\n" "Sync"                          "off (all profiles)" "ON"
   printf "  %-30s %-22s %s\n" "Add profile / guest mode"      "blocked"         "allowed"
-  printf "  %-30s %-22s %s\n" "Password manager"              "off"             "off"
   printf "  %-30s %-22s %s\n" "Address autofill"              "off"             "ON"
   printf "  %-30s %-22s %s\n" "Card autofill"                 "off"             "Brave default"
   printf "  %-30s %-22s %s\n" "Translate & spellcheck"        "off"             "ON"
   printf "  %-30s %-22s %s\n" "Bookmarks bar"                 "hidden"          "shown"
   printf "  %-30s %-22s %s\n" "DevTools"                      "off"             "ON"
-  printf "  %-30s %-22s %s\n" "Search suggestions"            "off"             "off"
-  printf "  %-30s %-22s %s\n" "Background mode"               "off"             "off"
+  printf "  %-30s %-22s %s\n" "DNS-over-HTTPS"                "forced (AdGuard)" "automatic"
   echo ""
   echo "  Both levels: homepage/new tab = about:blank, search = Brave Search"
   echo "  (Brave, Google, DuckDuckGo), Memory Saver ON, HTTPS upgrades ON."
