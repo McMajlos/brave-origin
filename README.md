@@ -17,26 +17,32 @@
 
 ## ✨ What It Does
 
-Brave is great, but it ships with **Rewards, Wallet, VPN, Leo AI, News, Talk, Tor, Speedreader, Playlist, Wayback Machine, Web Discovery, telemetry** — a ton of features most people never touch. This project kills them all at the **system policy level**, meaning they don't just get hidden — they stop loading entirely. No background processes, no UI clutter, no wasted RAM.
+Brave is great, but it ships with a lot of extras most people never touch: **Rewards, Wallet, VPN, News, Talk, Tor, Playlist, Wayback Machine, Web Discovery and telemetry**. This project turns them off at the **system policy level**, meaning they don't just get hidden — they stop loading entirely. No background processes, no UI clutter, no wasted RAM.
 
-> The table below describes the **Extreme** level. The **Hard** level (recommended) keeps Leo AI, Speedreader, sync and a few other things - see [Debloat levels](#debloat-levels).
+It also covers features you may actually use (**Leo AI, Speedreader, sync, DevTools, autofill...**). That is why there are two levels, and you choose what stays:
 
-| Feature | Effect |
-|---------|--------|
-| Leo AI | Disabled at root level |
-| Brave Rewards / BAT | Disabled at root level |
-| Crypto Wallet + Web3 | Disabled at root level |
-| VPN upsells | Disabled at root level |
-| Brave News feed | Disabled at root level |
-| Brave Talk | Disabled at root level |
-| Tor mode | Disabled at root level |
-| Speedreader | Disabled at root level |
-| Wayback Machine | Disabled at root level |
-| Playlist | Disabled at root level |
-| P3A / Stats / Web Discovery | Disabled at root level |
-| Sync | Disabled at root level |
+- **Hard** (recommended) - removes the bloat and telemetry, keeps the useful features.
+- **Extreme** - maximum lockdown, everything disabled.
+- **Custom** - pick Hard / Extreme / Skip per category.
 
-...and **keeps Shields** (ad/tracker blocking) fully intact.
+See [Debloat levels](#debloat-levels) for the full comparison.
+
+| Feature | Extreme | Hard |
+|---------|---------|------|
+| Brave Rewards / BAT | Disabled at root level | Disabled at root level |
+| Crypto Wallet + Web3 | Disabled at root level | Disabled at root level |
+| VPN upsells | Disabled at root level | Disabled at root level |
+| Brave News feed | Disabled at root level | Disabled at root level |
+| Brave Talk | Disabled at root level | Disabled at root level |
+| Tor mode | Disabled at root level | Disabled at root level |
+| Wayback Machine | Disabled at root level | Disabled at root level |
+| Playlist | Disabled at root level | Disabled at root level |
+| P3A / Stats / Web Discovery | Disabled at root level | Disabled at root level |
+| Leo AI | Disabled at root level | **Kept** |
+| Speedreader | Disabled at root level | **Kept** |
+| Sync | Disabled at root level | **Kept** (per profile) |
+
+Both levels **keep Shields** (ad/tracker blocking) fully intact.
 
 ---
 
