@@ -112,67 +112,117 @@ Manual flags and settings in `brave://flags` / `brave://settings` are not touche
 
 See [Android note](#android).
 
-**Verify:** Open `brave://policy` — every switch should show **"Enabled"**.
+**Verify:** Open `brave://policy` — the policies of the level you chose should be listed with status **OK** (see the [Policy Reference](#-policy-reference) for the values).
 
 ---
 
 ## 📋 Policy Reference
 
-> The reference below lists the **Extreme** values. **Hard** differs only where the table above says so (`policies-hard.json` / `brave-origin-hard.reg` contain the exact Hard set).
+> Values written by each level. `—` = not set (Brave default, you can change it in the browser). The scripts generate these from the same list; `policies.json` / `brave-origin.reg` = Extreme, `policies-hard.json` / `brave-origin-hard.reg` = Hard.
 
-### Brave Bloat
-| Policy | Effect |
-|--------|--------|
-| `BraveRewardsDisabled` | Disabled at root level |
-| `BraveWalletDisabled` | Disabled at root level |
-| `BraveVPNDisabled` | Disabled at root level |
-| `BraveAIChatEnabled = false` | Disabled at root level |
-| `BraveNewsDisabled` | Disabled at root level |
-| `BraveTalkDisabled` | Disabled at root level |
-| `TorDisabled` | Disabled at root level |
-| `BraveSpeedreaderEnabled = false` | Disabled at root level |
-| `BraveWaybackMachineEnabled = false` | Disabled at root level |
-| `BravePlaylistEnabled = false` | Disabled at root level |
+### Brave bloat
 
-### Telemetry & Network
-| Policy | Effect |
-|--------|--------|
-| `BraveP3AEnabled = false` | Disabled at root level |
-| `BraveStatsPingEnabled = false` | Disabled at root level |
-| `BraveWebDiscoveryEnabled = false` | Disabled at root level |
-| `SyncDisabled` | Disabled at root level |
-| `BackgroundModeEnabled = false` | Disabled at root level |
-| `MetricsReportingEnabled = false` | Disabled at root level |
-| `NetworkPredictionOptions = 0` | **Enabled** (DNS prefetch + preconnect — speed fix) |
+| Policy | Extreme | Hard |
+|--------|---------|------|
+| `BraveRewardsDisabled` | `true` | `true` |
+| `BraveWalletDisabled` | `true` | `true` |
+| `BraveVPNDisabled` | `true` | `true` |
+| `BraveNewsDisabled` | `true` | `true` |
+| `BraveTalkDisabled` | `true` | `true` |
+| `TorDisabled` | `true` | `true` |
+| `BravePlaylistEnabled` | `false` | `false` |
+| `BraveWaybackMachineEnabled` | `false` | `false` |
 
-### Features
-| Policy | Effect |
-|--------|--------|
-| `PasswordManagerEnabled = false` | Disabled at root level |
-| `AutofillAddressEnabled = false` | Disabled at root level |
-| `AutofillCreditCardEnabled = false` | Disabled at root level |
-| `TranslateEnabled = false` | Disabled at root level |
-| `DeveloperToolsAvailability = 2` | Disabled at root level |
-| `SpellcheckEnabled = false` | Disabled at root level |
-| `SearchSuggestEnabled = false` | Disabled at root level |
+### Leo AI & Speedreader
 
-### UI Tweaks
-| Policy | Effect |
-|--------|--------|
-| `BookmarkBarEnabled = false` | Disabled at root level |
-| `ShowHomeButton = false` | Disabled at root level |
-| `HomepageLocation = about:blank` | Set to blank |
-| `NewTabPageLocation = about:blank` | Set to blank |
+| Policy | Extreme | Hard |
+|--------|---------|------|
+| `BraveAIChatEnabled` | `false` | — |
+| `BraveSpeedreaderEnabled` | `false` | `true` |
 
-### Search Engines
-**Extreme only:** default is Brave Search and the list is restricted to **Brave Search · Google · DuckDuckGo** (Linux/JSON). **Hard** does not touch your search engines.
+### Telemetry & network
 
-### RAM Savings
-| Policy | Effect |
-|--------|--------|
-| `HighEfficiencyModeEnabled = true` | Memory Saver enabled |
-| `BackgroundModeEnabled = false` | Disabled at root level |
-| All feature backends unloaded | RAM freed |
+| Policy | Extreme | Hard |
+|--------|---------|------|
+| `BraveP3AEnabled` | `false` | `false` |
+| `BraveStatsPingEnabled` | `false` | `false` |
+| `BraveWebDiscoveryEnabled` | `false` | `false` |
+| `MetricsReportingEnabled` | `false` | `false` |
+| `UserFeedbackAllowed` | `false` | `false` |
+| `PrivacySandboxAdTopicsEnabled` | `false` | `false` |
+| `PrivacySandboxPromptEnabled` | `false` | `false` |
+| `PrivacySandboxSiteEnabledAdsEnabled` | `false` | `false` |
+| `PaymentMethodQueryEnabled` | `false` | `false` |
+| `AlternateErrorPagesEnabled` | `false` | `false` |
+| `NetworkPredictionOptions` | `0` | `0` |
+| `SearchSuggestEnabled` | `false` | `false` |
+
+### Privacy (DNS, Safe Browsing)
+
+| Policy | Extreme | Hard |
+|--------|---------|------|
+| `SafeBrowsingProtectionLevel` | `1` | `1` |
+| `DnsOverHttpsMode` | `secure` | — |
+| `DnsOverHttpsTemplates` | `https://dns.adguard-dns.com/dns-query` | — |
+
+### Sync & profiles
+
+| Policy | Extreme | Hard |
+|--------|---------|------|
+| `SyncDisabled` | `true` | — |
+| `BrowserAddPersonEnabled` | `false` | — |
+| `BrowserGuestModeEnabled` | `false` | — |
+
+### Passwords, autofill, translate & spellcheck
+
+| Policy | Extreme | Hard |
+|--------|---------|------|
+| `PasswordManagerEnabled` | `false` | `false` |
+| `AutofillAddressEnabled` | `false` | `true` |
+| `AutofillCreditCardEnabled` | `false` | — |
+| `TranslateEnabled` | `false` | `true` |
+| `SpellcheckEnabled` | `false` | `true` |
+| `SpellcheckServiceEnabled` | `false` | `false` |
+
+### UI tweaks
+
+| Policy | Extreme | Hard |
+|--------|---------|------|
+| `ShowHomeButton` | `false` | `false` |
+| `HomepageLocation` | `about:blank` | `about:blank` |
+| `DefaultBrowserSettingEnabled` | `false` | `false` |
+| `BookmarkBarEnabled` | `false` | `true` |
+| `NewTabPageLocation` | `about:blank` | — |
+
+### Developer tools
+
+| Policy | Extreme | Hard |
+|--------|---------|------|
+| `DeveloperToolsAvailability` | `2` | `1` |
+
+### Search engine
+
+| Policy | Extreme | Hard |
+|--------|---------|------|
+| `DefaultSearchProviderEnabled` | `true` | — |
+| `DefaultSearchProviderName` | `Brave Search` | — |
+| `DefaultSearchProviderSearchURL` | `https://search.brave.com/search?q={searchTerms}` | — |
+| `ManagedSearchEngines` (Linux / JSON only) | Brave Search, Google, DuckDuckGo | — |
+
+### Performance & misc
+
+| Policy | Extreme | Hard |
+|--------|---------|------|
+| `BackgroundModeEnabled` | `false` | `false` |
+| `HighEfficiencyModeEnabled` | `true` | `true` |
+| `ComponentUpdatesEnabled` | `true` | `true` |
+| `HttpsUpgradesEnabled` | `true` | `true` |
+| `IncognitoModeAvailability` | `0` | `0` |
+| `DownloadRestrictions` | `0` | `0` |
+| `PromptForDownloadLocation` | `true` | `true` |
+| `PrintingEnabled` | `true` | `true` |
+
+`NetworkPredictionOptions = 0` keeps DNS prefetch and preconnect enabled (speed fix) in both levels. `ManagedSearchEngines` is not included in the Windows/macOS scripts or the `.reg` files.
 
 ---
 
@@ -253,13 +303,6 @@ Create a desktop shortcut and point its icon to your `.ico` file:
 | `setup_mac.sh` | macOS | Menu, backup/restore, plist deployment + launcher app with flags |
 | `brave-origin.reg` | Windows | Manual registry import (Extreme) |
 | `brave-origin-hard.reg` | Windows | Manual registry import (Hard) |
-
-------|----------|---------|
-| `policies.json` | All | Complete policy definitions |
-| `setup.sh` | Linux | Auto-deploy + desktop entry patch |
-| `setup.bat` | Windows | Reg import + shortcut flags (normal & Store) |
-| `setup_mac.sh` | macOS | Plist deployment + launcher app with flags |
-| `brave-origin.reg` | Windows | Manual registry import |
 
 ---
 
