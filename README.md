@@ -54,8 +54,9 @@ What each level does (the same table is shown by the scripts):
 | New tab page | about:blank | **unchanged** |
 | DevTools | off | **ON** |
 | DNS-over-HTTPS | forced (AdGuard) | **your choice** (not locked) |
+| Default search engine | Brave Search | **your choice** (not overridden) |
 
-**Both levels also:** homepage = `about:blank`, default search = Brave Search, Memory Saver ON, HTTPS upgrades ON. Shields (ad/tracker blocking) stay fully intact.
+**Both levels also:** homepage = `about:blank`, Memory Saver ON, HTTPS upgrades ON. Shields (ad/tracker blocking) stay fully intact.
 
 ---
 
@@ -164,7 +165,7 @@ See [Android note](#android).
 | `NewTabPageLocation = about:blank` | Set to blank |
 
 ### Search Engines
-Restricted to **Brave Search · Google · DuckDuckGo** only.
+**Extreme only:** default is Brave Search and the list is restricted to **Brave Search · Google · DuckDuckGo** (Linux/JSON). **Hard** does not touch your search engines.
 
 ### RAM Savings
 | Policy | Effect |

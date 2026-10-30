@@ -42,9 +42,6 @@ Windows Registry Editor Version 5.00
 "DefaultBrowserSettingEnabled"=dword:00000000
 "BookmarkBarEnabled"=dword:00000001
 "DeveloperToolsAvailability"=dword:00000001
-"DefaultSearchProviderEnabled"=dword:00000001
-"DefaultSearchProviderName"="Brave Search"
-"DefaultSearchProviderSearchURL"="https://search.brave.com/search?q={searchTerms}"
 "BackgroundModeEnabled"=dword:00000000
 "HighEfficiencyModeEnabled"=dword:00000001
 "ComponentUpdatesEnabled"=dword:00000001

@@ -60,7 +60,7 @@ call :ask passwords "Passwords and autofill" "Password manager OFF, address auto
 call :ask languages "Translate and spellcheck" "Translate and local spellcheck ON, Google spellcheck service stays OFF" "Translate and spellcheck OFF"
 call :ask ui "Interface" "Bookmarks bar shown, no home button, homepage about:blank, new tab unchanged so extensions can replace it, no default-browser nag" "Bookmarks bar hidden, no home button, homepage and new tab about:blank, no default-browser nag"
 call :ask devtools "Developer tools" "DevTools enabled" "DevTools disabled"
-call :ask search "Search engine" "same as Extreme" "Default search engine Brave Search"
+call :ask search "Search engine" "Search engine left to you, not overridden" "Default search engine Brave Search"
 call :ask perf "Performance and misc" "same as Extreme" "Background mode OFF so Brave quits when the last window closes, Memory Saver ON, HTTPS upgrades ON, incognito, printing and downloads allowed"
 goto :chosen
 
@@ -283,10 +283,10 @@ echo   ^| Bookmarks bar                  ^| hidden               ^| shown       
 echo   ^| New tab page                   ^| about:blank          ^| unchanged              ^|
 echo   ^| DevTools                       ^| off                  ^| ON                     ^|
 echo   ^| DNS-over-HTTPS                 ^| forced (AdGuard)     ^| your choice            ^|
+echo   ^| Default search engine          ^| Brave Search         ^| your choice            ^|
 echo   +--------------------------------+----------------------+------------------------+
 echo.
-echo   Both levels: homepage = about:blank, default search = Brave Search,
-echo   Memory Saver ON, HTTPS upgrades ON.
+echo   Both levels: homepage = about:blank, Memory Saver ON, HTTPS upgrades ON.
 echo   Policies lock the matching options in brave://settings
 echo   ("managed by your organization"). Option 4 undoes this.
 echo.
@@ -410,9 +410,11 @@ exit /b 0
 
 :cat_search
 if "%~1"=="s" exit /b 0
-call :dw DefaultSearchProviderEnabled 1
-call :sz DefaultSearchProviderName "Brave Search"
-call :sz DefaultSearchProviderSearchURL "https://search.brave.com/search?q={searchTerms}"
+if "%~1"=="e" (
+  call :dw DefaultSearchProviderEnabled 1
+  call :sz DefaultSearchProviderName "Brave Search"
+  call :sz DefaultSearchProviderSearchURL "https://search.brave.com/search?q={searchTerms}"
+)
 exit /b 0
 
 :cat_perf

@@ -134,9 +134,11 @@ emit() {
       fi
       ;;
     search)
-      echo 'DefaultSearchProviderEnabled|bool|true'
-      echo 'DefaultSearchProviderName|string|Brave Search'
-      echo 'DefaultSearchProviderSearchURL|string|https://search.brave.com/search?q={searchTerms}'
+      if [ "$level" = "e" ]; then
+        echo 'DefaultSearchProviderEnabled|bool|true'
+        echo 'DefaultSearchProviderName|string|Brave Search'
+        echo 'DefaultSearchProviderSearchURL|string|https://search.brave.com/search?q={searchTerms}'
+      fi
       ;;
     perf)
       echo 'BackgroundModeEnabled|bool|false'
@@ -164,7 +166,7 @@ cat_info() {
     languages) C_TITLE="Translate and spellcheck"; C_EXT="Translate and spellcheck OFF"; C_HARD="Translate and local spellcheck ON, Google spellcheck service stays OFF" ;;
     ui) C_TITLE="Interface"; C_EXT="Bookmarks bar hidden, no home button, homepage and new tab about:blank, no default-browser nag"; C_HARD="Bookmarks bar shown, no home button, homepage about:blank, new tab unchanged so extensions can replace it, no default-browser nag" ;;
     devtools) C_TITLE="Developer tools"; C_EXT="DevTools disabled"; C_HARD="DevTools enabled" ;;
-    search) C_TITLE="Search engine"; C_EXT="Default search engine Brave Search"; C_HARD="same as Extreme" ;;
+    search) C_TITLE="Search engine"; C_EXT="Default search engine Brave Search"; C_HARD="Search engine left to you, not overridden" ;;
     perf) C_TITLE="Performance and misc"; C_EXT="Background mode OFF so Brave quits when the last window closes, Memory Saver ON, HTTPS upgrades ON, incognito, printing and downloads allowed"; C_HARD="same as Extreme" ;;
   esac
 }
@@ -209,10 +211,10 @@ print_levels() {
   row "New tab page"                "about:blank"        "unchanged"
   row "DevTools"                    "off"                "ON"
   row "DNS-over-HTTPS"              "forced (AdGuard)"   "your choice"
+  row "Default search engine"       "Brave Search"       "your choice"
   sep
   echo ""
-  echo "  Both levels: homepage = about:blank, default search = Brave Search,"
-  echo "  Memory Saver ON, HTTPS upgrades ON."
+  echo "  Both levels: homepage = about:blank, Memory Saver ON, HTTPS upgrades ON."
   echo "  Policies lock the matching options in brave://settings"
   echo "  (\"managed by your organization\"). Option 4 undoes this."
   echo ""

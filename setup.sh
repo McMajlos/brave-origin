@@ -126,7 +126,7 @@ CAT_HARD[devtools]="DevTools enabled"
 
 CAT_TITLE[search]="Search engine"
 CAT_EXT[search]="Default Brave Search; list: Brave, Google, DuckDuckGo"
-CAT_HARD[search]="same as Extreme"
+CAT_HARD[search]="Search engine left to you, not overridden"
 
 CAT_TITLE[perf]="Performance & misc"
 CAT_EXT[perf]="Background mode OFF (Brave quits when last window closes), Memory Saver ON, HTTPS upgrades ON, incognito/printing/downloads allowed"
@@ -216,10 +216,12 @@ emit() {
       [ "$level" = "h" ] && echo '"DeveloperToolsAvailability": 1'
       ;;
     search)
-      echo '"ManagedSearchEngines": [{"name": "Brave Search", "keyword": "search.brave.com", "search_url": "https://search.brave.com/search?q={searchTerms}", "suggest_url": "https://search.brave.com/api/suggest?q={searchTerms}", "encoding": "UTF-8", "favicon_url": "https://brave.com/favicon.ico"}, {"name": "Google", "keyword": "google.com", "search_url": "https://www.google.com/search?q={searchTerms}", "suggest_url": "https://www.google.com/complete/search?output=chrome&q={searchTerms}", "encoding": "UTF-8", "favicon_url": "https://www.google.com/favicon.ico"}, {"name": "DuckDuckGo", "keyword": "duckduckgo.com", "search_url": "https://duckduckgo.com/?q={searchTerms}", "suggest_url": "https://duckduckgo.com/ac/?q={searchTerms}&type=list", "encoding": "UTF-8", "favicon_url": "https://duckduckgo.com/favicon.ico"}]'
-      echo '"DefaultSearchProviderEnabled": true'
-      echo '"DefaultSearchProviderName": "Brave Search"'
-      echo '"DefaultSearchProviderSearchURL": "https://search.brave.com/search?q={searchTerms}"'
+      if [ "$level" = "e" ]; then
+        echo '"ManagedSearchEngines": [{"name": "Brave Search", "keyword": "search.brave.com", "search_url": "https://search.brave.com/search?q={searchTerms}", "suggest_url": "https://search.brave.com/api/suggest?q={searchTerms}", "encoding": "UTF-8", "favicon_url": "https://brave.com/favicon.ico"}, {"name": "Google", "keyword": "google.com", "search_url": "https://www.google.com/search?q={searchTerms}", "suggest_url": "https://www.google.com/complete/search?output=chrome&q={searchTerms}", "encoding": "UTF-8", "favicon_url": "https://www.google.com/favicon.ico"}, {"name": "DuckDuckGo", "keyword": "duckduckgo.com", "search_url": "https://duckduckgo.com/?q={searchTerms}", "suggest_url": "https://duckduckgo.com/ac/?q={searchTerms}&type=list", "encoding": "UTF-8", "favicon_url": "https://duckduckgo.com/favicon.ico"}]'
+        echo '"DefaultSearchProviderEnabled": true'
+        echo '"DefaultSearchProviderName": "Brave Search"'
+        echo '"DefaultSearchProviderSearchURL": "https://search.brave.com/search?q={searchTerms}"'
+      fi
       ;;
     perf)
       echo '"BackgroundModeEnabled": false'
@@ -275,10 +277,10 @@ print_levels() {
   row "New tab page"                "about:blank"        "unchanged"
   row "DevTools"                    "off"                "ON"
   row "DNS-over-HTTPS"              "forced (AdGuard)"   "your choice"
+  row "Default search engine"       "Brave Search"       "your choice"
   sep
   echo ""
-  echo "  Both levels: homepage = about:blank, search = Brave Search"
-  echo "  (Brave, Google, DuckDuckGo), Memory Saver ON, HTTPS upgrades ON."
+  echo "  Both levels: homepage = about:blank, Memory Saver ON, HTTPS upgrades ON."
   echo "  Policies lock the matching options in brave://settings"
   echo "  (\"managed by your organization\"). Option 4 undoes this."
   echo ""
