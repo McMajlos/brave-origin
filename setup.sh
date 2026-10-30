@@ -434,5 +434,5 @@ echo "  brave://settings/appearance          -> Use system title bar and borders
 echo "  brave://settings/system              -> Memory Saver ON"
 echo ""
 echo "Verify: brave://policy"
-echo "Undo:   ./setup.sh --restore"
+echo "Undo:   ./setup.sh --restore   (or run again and choose 4) Restore)"
 echo ""
