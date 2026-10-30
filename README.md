@@ -46,14 +46,31 @@ Brave is great, but it ships with **Rewards, Wallet, VPN, Leo AI, News, Talk, To
 chmod +x setup.sh && ./setup.sh
 ```
 
-The script shows a menu with the differences between levels:
+The script shows a menu:
 
-| Level | What it does |
-|---|---|
-| **1) Extreme** | Original behaviour: everything off (Leo, Speedreader, sync, passwords, autofill, DevTools, translate, bookmarks bar...) |
-| **2) Hard** | Same debloat, keeps Leo AI, Speedreader, sync, address autofill, DevTools, translate/spellcheck, bookmarks bar; Safe Browsing Standard; DoH `automatic` |
-| **3) Custom** | Choose Extreme / Hard / Skip per category |
-| **4) Restore** | Undo changes from the backup |
+1. **Extreme** - maximum lockdown, everything disabled
+2. **Hard** - same debloat, but keeps features you may actually use
+3. **Custom** - choose Extreme / Hard / Skip per category
+4. **Restore** - back to the original Brave state (from backup)
+
+| Setting | Extreme | Hard |
+|---|---|---|
+| Rewards / Wallet / VPN / News / Tor | off | off |
+| Telemetry & tracking | off | off |
+| Leo AI | off | **ON** |
+| Speedreader | off | **ON** |
+| Safe Browsing | Enhanced | **Standard** |
+| DNS-over-HTTPS | forced (AdGuard) | **automatic** |
+| Sync | off (all profiles) | **ON** |
+| Add profile / guest mode | blocked | **allowed** |
+| Password manager | off | off |
+| Address autofill | off | **ON** |
+| Card autofill | off | Brave default |
+| Translate & spellcheck | off | **ON** |
+| Bookmarks bar | hidden | **shown** |
+| DevTools | off | **ON** |
+| Search suggestions | off | off |
+| Background mode | off | off |
 
 It also offers to back up your current Brave policy/desktop entry first (recommended). To undo everything later:
 
