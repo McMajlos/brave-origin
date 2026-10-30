@@ -7,7 +7,7 @@ set -e
 # Usage:   chmod +x setup.sh && ./setup.sh            (interactive menu)
 #          ./setup.sh --restore                       (undo, from backup)
 #          (also works with: sudo ./setup.sh)
-# Levels:  1) Extreme  2) Hard  3) Custom  4) Restore original
+# Levels:  1) Hard  2) Extreme  3) Custom  4) Restore original
 # Verif:   brave://policy
 ###############################################################################
 
@@ -238,37 +238,46 @@ emit() {
 }
 
 print_levels() {
+  local W1=30 W2=20 W3=22
+  dashes() { printf '%*s' "$1" '' | tr ' ' '-'; }
+  sep()  { printf "  +%s+%s+%s+\n" "$(dashes $((W1+2)))" "$(dashes $((W2+2)))" "$(dashes $((W3+2)))"; }
+  row()  { printf "  | %-${W1}s | %-${W2}s | %-${W3}s |\n" "$1" "$2" "$3"; }
+  span() { printf "  | %-${W1}s | %-$((W2+W3+3))s |\n" "$1" "$2"; }
+  grp()  { printf "  | %-$((W1+W2+W3+6))s |\n" "$1"; }
+
   echo "Debloat levels:"
   echo ""
-  echo "  1) EXTREME  - maximum lockdown, everything disabled."
-  echo "  2) HARD     - same debloat, but keeps features you may actually use."
-  echo "  3) CUSTOM   - choose Extreme / Hard / Skip for each category."
+  echo "  1) HARD     - same debloat, but keeps features you may actually use. (recommended)"
+  echo "  2) EXTREME  - maximum lockdown, everything disabled."
+  echo "  3) CUSTOM   - choose Hard / Extreme / Skip for each category."
   echo "  4) RESTORE  - back to the original Brave state (from backup)."
   echo ""
-  printf "  %-30s %-22s %s\n" "Setting" "EXTREME" "HARD"
-  echo "  ------------------------------------------------------------------"
-  echo "  Same in both:"
-  printf "  %-30s %s\n" "Safe Browsing" "Standard (Enhanced shares more visited links)"
-  echo ""
-  echo "  Disabled in both:"
-  printf "  %-30s %-22s %s\n" "Rewards/Wallet/VPN/News/Tor"   "off"             "off"
-  printf "  %-30s %-22s %s\n" "Telemetry & tracking"          "off"             "off"
-  printf "  %-30s %-22s %s\n" "Password manager"              "off"             "off"
-  printf "  %-30s %-22s %s\n" "Search suggestions"            "off"             "off"
-  printf "  %-30s %-22s %s\n" "Background mode"               "off"             "off"
-  echo ""
-  echo "  Differences:"
-  printf "  %-30s %-22s %s\n" "Leo AI"                        "off"             "ON"
-  printf "  %-30s %-22s %s\n" "Speedreader"                   "off"             "ON"
-  printf "  %-30s %-22s %s\n" "Sync"                          "off (all profiles)" "ON"
-  printf "  %-30s %-22s %s\n" "Add profile / guest mode"      "blocked"         "allowed"
-  printf "  %-30s %-22s %s\n" "Address autofill"              "off"             "ON"
-  printf "  %-30s %-22s %s\n" "Card autofill"                 "off"             "Brave default"
-  printf "  %-30s %-22s %s\n" "Translate & spellcheck"        "off"             "ON"
-  printf "  %-30s %-22s %s\n" "Bookmarks bar"                 "hidden"          "shown"
-  printf "  %-30s %-22s %s\n" "New tab page"                  "about:blank"     "unchanged"
-  printf "  %-30s %-22s %s\n" "DevTools"                      "off"             "ON"
-  printf "  %-30s %-22s %s\n" "DNS-over-HTTPS"                "forced (AdGuard)" "automatic"
+  sep
+  row "Setting" "EXTREME" "HARD"
+  sep
+  grp "Same in both"
+  span "Safe Browsing" "Standard (Enhanced shares more visited links)"
+  sep
+  grp "Disabled in both"
+  row "Rewards/Wallet/VPN/News/Tor" "off" "off"
+  row "Telemetry & tracking"        "off" "off"
+  row "Password manager"            "off" "off"
+  row "Search suggestions"          "off" "off"
+  row "Background mode"             "off" "off"
+  sep
+  grp "Differences"
+  row "Leo AI"                      "off"                "ON"
+  row "Speedreader"                 "off"                "ON"
+  row "Sync"                        "off (all profiles)" "ON"
+  row "Add profile / guest mode"    "blocked"            "allowed"
+  row "Address autofill"            "off"                "ON"
+  row "Card autofill"               "off"                "Brave default"
+  row "Translate & spellcheck"      "off"                "ON"
+  row "Bookmarks bar"               "hidden"             "shown"
+  row "New tab page"                "about:blank"        "unchanged"
+  row "DevTools"                    "off"                "ON"
+  row "DNS-over-HTTPS"              "forced (AdGuard)"   "automatic"
+  sep
   echo ""
   echo "  Both levels: homepage = about:blank, search = Brave Search"
   echo "  (Brave, Google, DuckDuckGo), Memory Saver ON, HTTPS upgrades ON."
@@ -293,18 +302,18 @@ LEVEL_NAME=""
 while true; do
   read -r -p "Choose level [1-4]: " choice
   case "$choice" in
-    1) for id in "${CAT_IDS[@]}"; do LEVEL[$id]=e; done; LEVEL_NAME="Extreme"; break ;;
-    2) for id in "${CAT_IDS[@]}"; do LEVEL[$id]=h; done; LEVEL_NAME="Hard"; break ;;
+    1) for id in "${CAT_IDS[@]}"; do LEVEL[$id]=h; done; LEVEL_NAME="Hard"; break ;;
+    2) for id in "${CAT_IDS[@]}"; do LEVEL[$id]=e; done; LEVEL_NAME="Extreme"; break ;;
     3)
       LEVEL_NAME="Custom"
       echo ""
       for id in "${CAT_IDS[@]}"; do
         echo "* ${CAT_TITLE[$id]}"
-        echo "    e) Extreme: ${CAT_EXT[$id]}"
         echo "    h) Hard:    ${CAT_HARD[$id]}"
+        echo "    e) Extreme: ${CAT_EXT[$id]}"
         echo "    s) Skip:    leave Brave default"
         while true; do
-          read -r -p "  [e/h/s]: " lv
+          read -r -p "  [h/e/s]: " lv
           case "$lv" in
             e|E) LEVEL[$id]=e; break ;;
             h|H) LEVEL[$id]=h; break ;;

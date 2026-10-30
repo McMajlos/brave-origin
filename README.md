@@ -48,8 +48,8 @@ chmod +x setup.sh && ./setup.sh
 
 The script shows a menu:
 
-1. **Extreme** - maximum lockdown, everything disabled
-2. **Hard** - same debloat, but keeps features you may actually use
+1. **Hard** - same debloat, but keeps features you may actually use (recommended)
+2. **Extreme** - maximum lockdown, everything disabled
 3. **Custom** - choose Extreme / Hard / Skip per category
 4. **Restore** - back to the original Brave state (from backup)
 
